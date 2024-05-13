@@ -20,7 +20,7 @@ def select_training(level, comp_list):
 st.title("Employee recommendation test")
 
 # Employee selection
-name = st.selectbox("Employee Name", emp_df["NAME"])
+name = st.selectbox("Employee Name", emp_df["NAME"], index=None)
 st.header("Employee Info")
 employee_df = emp_df.loc[emp_df["NAME"] == name, ["LEVEL", "POSITION"]]
 st.dataframe(employee_df, use_container_width=True)
