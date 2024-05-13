@@ -29,7 +29,14 @@ st.dataframe(employee_df, use_container_width=True)
 st.header("Training Recommendation")
 emp_row = emp_df[emp_df["NAME"] == name]
 if not emp_row.empty:
-    comp_list = emp_row["BAD_COMP"].iloc[0].split(";")
+    bad_comp_value = emp_row["BAD_COMP"].iloc[0]
+    if isinstance(bad_comp_value, str):
+        comp_list = bad_comp_value.split(";")
+    else:
+        # Handle non-string values, e.g., floats
+        comp_list = [
+            "Default Value"
+        ]  # Provide a default value or handle it based on your application logic
     lvl = emp_row["LEVEL"].iloc[0]
     recommended_training = select_training(lvl, comp_list)["COURSE_NAME"]
     if not recommended_training.empty:
