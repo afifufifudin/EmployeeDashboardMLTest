@@ -33,6 +33,7 @@ if not emp_row.empty:
     lvl = emp_row["LEVEL"].iloc[0]
     recommended_training = select_training(lvl, comp_list)["COURSE_NAME"]
     if not recommended_training.empty:
+        recommended_training = recommended_training.drop_duplicates()
         st.dataframe(
             recommended_training.reset_index(drop=True).rename(lambda x: f"{x+1}."),
             use_container_width=True,
